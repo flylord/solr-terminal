@@ -17,3 +17,71 @@ LoginScreen {
     color: $error;
     margin-top: 1;
 }
+
+#left {
+    width: 56;
+    border-right: solid $primary;
+}
+
+#server {
+    padding: 0 1;
+    color: $text-muted;
+}
+
+#form {
+    height: 1fr;
+    padding: 0 1;
+}
+
+#execute {
+    width: 100%;
+}
+
+.section {
+    height: auto;
+    border-top: solid $panel;
+}
+
+.group {
+    height: auto;
+}
+
+.field-label, .section-title {
+    margin-top: 1;
+    color: $accent;
+}
+
+.textarea {
+    height: 5;
+}
+
+.multi-row {
+    height: auto;
+}
+
+.multi-row Input {
+    width: 1fr;
+}
+
+.remove-row, .add-row {
+    min-width: 5;
+    width: 5;
+}
+
+#use-params {
+    height: auto;
+    max-height: 8;
+}
+
+#response {
+    width: 1fr;
+    padding: 0 1;
+}
+
+#response-url {
+    color: $accent;
+}
+
+#response-status {
+    color: $error;
+}
