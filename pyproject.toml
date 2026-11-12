@@ -2,6 +2,8 @@
 name = "solr_terminal"
 version = "0.1.0"
 description = "Terminal version of the Solr Admin Query screen"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
 requires-python = ">=3.12"
 dependencies = ["textual", "httpx"]
 

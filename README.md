@@ -22,3 +22,9 @@ Login values come from flags or `SOLR_URL`, `SOLR_USER`, `SOLR_PASSWORD`. Anythi
 ```
 uv run pytest
 ```
+
+## License
+
+Copyright (C) 2026 Aleksandar Ilic
+
+Released under the GNU General Public License v3.0 or later. See [LICENSE](LICENSE).
