@@ -2,6 +2,8 @@
 
 Terminal version of the Solr Admin Query screen, for standalone Solr 9 and 10.
 
+![solr_terminal](docs/images/screenshot.png)
+
 ## Run
 
 ```
