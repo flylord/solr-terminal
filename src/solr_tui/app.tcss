@@ -85,3 +85,7 @@ LoginScreen {
 #response-status {
     color: $error;
 }
+
+#response-body {
+    height: 1fr;
+}

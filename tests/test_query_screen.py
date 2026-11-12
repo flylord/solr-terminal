@@ -118,7 +118,23 @@ async def test_large_response_scrolls():
     async with app.run_test() as pilot:
         await pilot.pause()
         await execute(app, pilot)
-        view = app.screen.query_one(ResponseView)
-        assert view.max_scroll_y > 0
-        view.focus()
+        body = app.screen.query_one(ResponseView).body
+        assert body.max_scroll_y > 0
+        body.focus()
         await pilot.press("end")
+        await pilot.pause()
+        assert body.scroll_y > 0
+
+
+@respx.mock
+async def test_huge_response_renders_fast():
+    import time
+    body = "{\n" + "\n".join(f'  "field{i}":"value number {i} with some text",' for i in range(100_000)) + "\n}"
+    mock_solr(body=body)
+    app = Host()
+    async with app.run_test(size=(160, 50)) as pilot:
+        await pilot.pause()
+        start = time.monotonic()
+        await execute(app, pilot)
+        assert time.monotonic() - start < 3
+        assert app.screen.query_one(ResponseView).result.body == body

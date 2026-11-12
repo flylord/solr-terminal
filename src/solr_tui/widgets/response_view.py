@@ -1,18 +1,14 @@
 """Right pane: request URL, HTTP status and the raw response body."""
 
-from rich.syntax import Syntax
 from textual.app import ComposeResult
-from textual.containers import VerticalScroll
+from textual.containers import Vertical
 from textual.widgets import Static
 
 from solr_tui.client import QueryResult
+from solr_tui.widgets.response_body import ResponseBody
 
-LEXERS = {"": "json", "json": "json", "xml": "xml", "python": "python", "ruby": "ruby", "php": "php", "csv": "text"}
 
-
-class ResponseView(VerticalScroll):
-    can_focus = True
-
+class ResponseView(Vertical):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.result: QueryResult | None = None
@@ -20,7 +16,11 @@ class ResponseView(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield Static("", id="response-url")
         yield Static("", id="response-status")
-        yield Static("Press F5 or Ctrl+Enter to execute the query.", id="response-body")
+        yield ResponseBody("Press F5 or Ctrl+Enter to execute the query.", id="response-body")
+
+    @property
+    def body(self) -> ResponseBody:
+        return self.query_one("#response-body", ResponseBody)
 
     def show_running(self) -> None:
         self.query_one("#response-status", Static).update("Running...")
@@ -31,10 +31,5 @@ class ResponseView(VerticalScroll):
     def show(self, result: QueryResult, wt: str) -> None:
         self.result = result
         self.query_one("#response-url", Static).update(result.url)
-        status = "" if result.status == 200 else f"HTTP {result.status}"
-        self.query_one("#response-status", Static).update(status)
-        lexer = LEXERS.get(wt, "text")
-        self.query_one("#response-body", Static).update(
-            Syntax(result.body, lexer, theme="monokai", word_wrap=True, background_color="default")
-        )
-        self.scroll_home(animate=False)
+        self.query_one("#response-status", Static).update("" if result.status == 200 else f"HTTP {result.status}")
+        self.body.set_text(result.body, highlight_json=wt in ("", "json"))
