@@ -14,7 +14,7 @@ def test_section_order():
 
 
 def test_field_set_matches_reference_html():
-    html = pathlib.Path("docs/reference/solr-query.html").read_text()
+    html = pathlib.Path("tests/fixtures/solr-query.html").read_text()
     models = set(re.findall(r"ng-model=\"val\['([^']+)'\]\"", html)) - {"json"}
     models = {"hl.usePhraseHighlighter" if m == "hl.usePhraseHighLighter" else m for m in models}
     assert {f.name for f in all_fields()} == models
