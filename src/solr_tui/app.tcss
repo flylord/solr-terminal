@@ -1,0 +1,19 @@
+LoginScreen {
+    align: center middle;
+}
+
+#login-box {
+    width: 60;
+    height: auto;
+    border: round $primary;
+    padding: 1 2;
+}
+
+#login-box Input {
+    margin-bottom: 1;
+}
+
+#error {
+    color: $error;
+    margin-top: 1;
+}
