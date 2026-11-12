@@ -1,9 +1,9 @@
 import httpx
 import respx
 
-from solr_tui.app import Credentials, SolrTuiApp, resolve_credentials
-from solr_tui.screens.login import LoginScreen
-from solr_tui.screens.query import QueryScreen
+from solr_terminal.app import Credentials, SolrTuiApp, resolve_credentials
+from solr_terminal.screens.login import LoginScreen
+from solr_terminal.screens.query import QueryScreen
 
 BASE = "http://s/solr"
 

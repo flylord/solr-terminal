@@ -7,10 +7,10 @@ from textual.containers import Horizontal, Vertical
 from textual.screen import Screen
 from textual.widgets import Button, Footer, Label, Select
 
-from solr_tui.client import SolrClient, SolrError
-from solr_tui.params import build_request
-from solr_tui.widgets.query_form import QueryForm
-from solr_tui.widgets.response_view import ResponseView
+from solr_terminal.client import SolrClient, SolrError
+from solr_terminal.params import build_request
+from solr_terminal.widgets.query_form import QueryForm
+from solr_terminal.widgets.response_view import ResponseView
 
 
 class QueryScreen(Screen):

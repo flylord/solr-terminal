@@ -17,7 +17,7 @@ class Credentials:
 
 
 def resolve_credentials(argv: list[str], env: Mapping[str, str]) -> Credentials:
-    parser = argparse.ArgumentParser(prog="solr-tui", description="Terminal Solr query screen")
+    parser = argparse.ArgumentParser(prog="solr_terminal", description="Terminal Solr query screen")
     parser.add_argument("--url", help=f"Solr base URL (env SOLR_URL, default {DEFAULT_URL})")
     parser.add_argument("--user", help="username (env SOLR_USER)")
     parser.add_argument("--password", help="password (env SOLR_PASSWORD)")
@@ -30,7 +30,7 @@ def resolve_credentials(argv: list[str], env: Mapping[str, str]) -> Credentials:
 
 
 class SolrTuiApp(App):
-    TITLE = "Solr Query"
+    TITLE = "solr_terminal"
     CSS_PATH = "app.tcss"
     BINDINGS = [("ctrl+q", "quit", "Quit")]
 
@@ -39,6 +39,6 @@ class SolrTuiApp(App):
         self.creds = creds
 
     def on_mount(self) -> None:
-        from solr_tui.screens.login import LoginScreen
+        from solr_terminal.screens.login import LoginScreen
 
         self.push_screen(LoginScreen(self.creds, autoconnect=bool(self.creds.user and self.creds.password)))

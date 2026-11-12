@@ -4,7 +4,7 @@ import httpx
 import pytest
 import respx
 
-from solr_tui.client import SolrError
+from solr_terminal.client import SolrError
 
 BASE = "http://s/solr"
 CORES = f"{BASE}/admin/cores"

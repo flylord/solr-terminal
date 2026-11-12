@@ -1,5 +1,5 @@
-from solr_tui.form_spec import defaults
-from solr_tui.params import QueryInput, build_request, display_url
+from solr_terminal.form_spec import defaults
+from solr_terminal.params import QueryInput, build_request, display_url
 
 
 def qi(**kw):

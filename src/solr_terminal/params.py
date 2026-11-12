@@ -5,7 +5,7 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from urllib.parse import quote, urlencode
 
-from solr_tui.form_spec import SECTIONS
+from solr_terminal.form_spec import SECTIONS
 
 
 @dataclass(frozen=True)

@@ -1,7 +1,7 @@
 import pathlib
 import re
 
-from solr_tui.form_spec import SECTIONS, all_fields, defaults
+from solr_terminal.form_spec import SECTIONS, all_fields, defaults
 
 
 def test_defaults_match_web_ui():

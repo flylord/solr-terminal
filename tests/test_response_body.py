@@ -1,4 +1,4 @@
-from solr_tui.widgets.response_body import STYLES, _json_segments
+from solr_terminal.widgets.response_body import STYLES, _json_segments
 
 
 def test_json_tokens_coloured():

@@ -5,8 +5,8 @@ from textual.containers import Horizontal, Vertical, VerticalScroll
 from textual.widget import Widget
 from textual.widgets import Button, Checkbox, Input, Label, Select, SelectionList, TextArea
 
-from solr_tui.form_spec import SECTIONS, Field, all_fields, defaults
-from solr_tui.params import QueryInput
+from solr_terminal.form_spec import SECTIONS, Field, all_fields, defaults
+from solr_terminal.params import QueryInput
 
 
 def widget_id(name: str) -> str:

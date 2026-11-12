@@ -4,8 +4,8 @@ from textual.app import ComposeResult
 from textual.containers import Vertical
 from textual.widgets import Static
 
-from solr_tui.client import QueryResult
-from solr_tui.widgets.response_body import ResponseBody
+from solr_terminal.client import QueryResult
+from solr_terminal.widgets.response_body import ResponseBody
 
 
 class ResponseView(Vertical):

@@ -6,8 +6,8 @@ from textual.containers import Vertical
 from textual.screen import Screen
 from textual.widgets import Button, Footer, Input, Label
 
-from solr_tui.app import Credentials
-from solr_tui.client import SolrClient, SolrError
+from solr_terminal.app import Credentials
+from solr_terminal.client import SolrClient, SolrError
 
 
 class LoginScreen(Screen):
@@ -49,7 +49,7 @@ class LoginScreen(Screen):
 
     @work(exclusive=True)
     async def connect(self, url: str, user: str, password: str) -> None:
-        from solr_tui.screens.query import QueryScreen
+        from solr_terminal.screens.query import QueryScreen
 
         client = SolrClient(url, user, password)
         handed_over = False

@@ -1,7 +1,7 @@
 import os
 import sys
 
-from solr_tui.app import SolrTuiApp, resolve_credentials
+from solr_terminal.app import SolrTuiApp, resolve_credentials
 
 
 def main() -> None:

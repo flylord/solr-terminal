@@ -1,8 +1,8 @@
 import respx
 
-from solr_tui.client import SolrClient
-from solr_tui.screens.query import QueryScreen
-from solr_tui.widgets.response_view import ResponseView
+from solr_terminal.client import SolrClient
+from solr_terminal.screens.query import QueryScreen
+from solr_terminal.widgets.response_view import ResponseView
 from textual.app import App
 from textual.widgets import Button, Input, Select, TextArea
 

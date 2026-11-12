@@ -1,6 +1,6 @@
 import pytest_asyncio
 
-from solr_tui.client import SolrClient
+from solr_terminal.client import SolrClient
 
 BASE = "http://s/solr"
 
