@@ -147,3 +147,16 @@ async def test_quit_closes_client():
     async with app.run_test() as pilot:
         await pilot.pause()
     assert app.client._http.is_closed
+
+
+@respx.mock
+async def test_f6_toggles_between_form_and_response():
+    mock_solr()
+    app = Host()
+    async with app.run_test() as pilot:
+        await pilot.pause()
+        app.screen.query_one("#rows", Input).focus()
+        await pilot.press("f6")
+        assert app.focused.id == "response-body"
+        await pilot.press("f6")
+        assert app.focused.id == "rows"

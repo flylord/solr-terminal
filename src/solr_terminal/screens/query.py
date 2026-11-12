@@ -5,6 +5,7 @@ from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, Vertical
 from textual.screen import Screen
+from textual.widget import Widget
 from textual.widgets import Button, Footer, Label, Select
 
 from solr_terminal.client import SolrClient, SolrError
@@ -17,6 +18,7 @@ class QueryScreen(Screen):
     BINDINGS = [
         Binding("f5", "execute", "Execute Query"),
         Binding("ctrl+enter", "execute", "Execute Query", show=False),
+        Binding("f6", "toggle_pane", "Form/Response"),
         Binding("ctrl+q", "app.quit", "Quit"),
     ]
 
@@ -25,6 +27,7 @@ class QueryScreen(Screen):
         self.client = client
         self.cores = cores
         self.version = version
+        self._form_focus: Widget | None = None
 
     def compose(self) -> ComposeResult:
         with Horizontal():
@@ -65,6 +68,15 @@ class QueryScreen(Screen):
     async def load_paramsets(self) -> None:
         if self.core:
             self.query_one(QueryForm).set_paramsets(await self.client.paramsets(self.core))
+
+    def action_toggle_pane(self) -> None:
+        body = self.query_one(ResponseView).body
+        if self.focused is body:
+            target = self._form_focus if self._form_focus and self._form_focus.is_attached else self.query_one("#core")
+            target.focus()
+        else:
+            self._form_focus = self.focused
+            body.focus()
 
     def action_execute(self) -> None:
         view = self.query_one(ResponseView)

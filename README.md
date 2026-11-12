@@ -14,6 +14,7 @@ Login values come from flags or `SOLR_URL`, `SOLR_USER`, `SOLR_PASSWORD`. Anythi
 ## Keys
 
 - `F5` or `Ctrl+Enter`: execute query
+- `F6`: switch between the form and the response
 - `Tab` / `Shift+Tab`: move between fields
 - `Ctrl+Q`: quit
 
