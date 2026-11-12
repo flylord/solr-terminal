@@ -65,7 +65,7 @@ def build_request(core: str, q: QueryInput) -> tuple[str, list[tuple[str, str]]]
     if q.json:
         params.append(("json", q.json))
 
-    return f"{core}/{handler}", params
+    return f"{quote(core, safe='')}/{handler}", params
 
 
 def display_url(base_url: str, path: str, params: list[tuple[str, str]]) -> str:

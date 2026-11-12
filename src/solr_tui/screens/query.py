@@ -50,6 +50,9 @@ class QueryScreen(Screen):
     def on_mount(self) -> None:
         self.load_paramsets()
 
+    async def on_unmount(self) -> None:
+        await self.client.aclose()
+
     def on_select_changed(self, event: Select.Changed) -> None:
         if event.select.id == "core":
             self.load_paramsets()

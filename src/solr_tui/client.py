@@ -1,10 +1,9 @@
 """Async HTTP client for a standalone Solr server with Basic Auth."""
 
 from dataclasses import dataclass
+from urllib.parse import quote
 
 import httpx
-
-from solr_tui.params import display_url
 
 
 class SolrError(Exception):
@@ -56,7 +55,7 @@ class SolrClient:
 
     async def paramsets(self, core: str) -> list[str]:
         try:
-            data = await self._admin_json(f"{core}/config/params", [])
+            data = await self._admin_json(f"{quote(core, safe='')}/config/params", [])
         except SolrError:
             return []
         return sorted((data.get("response", {}).get("params") or {}).keys())
@@ -64,7 +63,7 @@ class SolrClient:
     async def query(self, path: str, params: list[tuple[str, str]]) -> QueryResult:
         response = await self._get(path, params)
         return QueryResult(
-            url=display_url(self.base_url, path, params),
+            url=str(response.url),
             status=response.status_code,
             content_type=response.headers.get("content-type", ""),
             body=response.text,

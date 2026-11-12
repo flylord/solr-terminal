@@ -43,3 +43,7 @@ def test_display_url_encodes_special_chars():
     url = display_url("http://h:8983/solr/", "c/select", [("q", 'title_t:"USB-C" AND p:[1 TO *] & #Računari')])
     assert url.startswith("http://h:8983/solr/c/select?q=")
     assert "&" not in url.split("?q=")[1] and "#" not in url and "Ra%C4%8Dunari" in url
+
+
+def test_core_name_is_escaped():
+    assert build_request("a#b", qi())[0] == "a%23b/select"

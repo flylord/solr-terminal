@@ -52,11 +52,14 @@ class LoginScreen(Screen):
         from solr_tui.screens.query import QueryScreen
 
         client = SolrClient(url, user, password)
+        handed_over = False
         try:
             cores = await client.list_cores()
             version = await client.solr_version()
+            self.app.switch_screen(QueryScreen(client, cores, version))
+            handed_over = True
         except SolrError as exc:
-            await client.aclose()
             self.query_one("#error", Label).update(exc.message)
-            return
-        self.app.switch_screen(QueryScreen(client, cores, version))
+        finally:
+            if not handed_over:
+                await client.aclose()

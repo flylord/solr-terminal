@@ -70,3 +70,15 @@ async def test_query_sends_basic_auth_and_params(client):
 async def test_solr_version(client):
     respx.get(f"{BASE}/admin/info/system").respond(json={"lucene": {"solr-spec-version": "9.8.0"}})
     assert await client.solr_version() == "9.8.0"
+
+
+@respx.mock
+async def test_query_url_is_the_sent_url(client):
+    respx.get(f"{BASE}/a/select").respond(200, text="{}")
+    r = await client.query("a/select", [("q", 'title:"a b" & é #x +y')])
+    assert r.url == str(respx.calls.last.request.url)
+
+
+async def test_aclose_closes_http_client(client):
+    await client.aclose()
+    assert client._http.is_closed

@@ -138,3 +138,12 @@ async def test_huge_response_renders_fast():
         await execute(app, pilot)
         assert time.monotonic() - start < 3
         assert app.screen.query_one(ResponseView).result.body == body
+
+
+@respx.mock
+async def test_quit_closes_client():
+    mock_solr()
+    app = Host()
+    async with app.run_test() as pilot:
+        await pilot.pause()
+    assert app.client._http.is_closed
